@@ -23,4 +23,4 @@ Finish time: _____
 
 Actual time needed to complete: _____
 
-	![city](./img/City%20Explorer.jpg)
+	![ezcv logo](https://raw.githubusercontent.com/Cipherian/city-explorer/main/img/City Explorer.jpg)
