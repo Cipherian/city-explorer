@@ -6,6 +6,7 @@
 }
 h1 {
   text-decoration: underline;
+  padding-bottom: 20px;
 }
 
 #city {
@@ -27,6 +28,11 @@ h1 {
   margin: none;
 }
 
+#formInput {
+  width:400px;
+  margin:20px auto;
+}
 .cardTitle {
+  text-align: center;
 
 }
