@@ -5,35 +5,46 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button'
+import Error from '/home/cyphe/projects/courses/class301/city-explorer/src/Components/Error.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       citySearch: "",
-      locationObj: {}
+      locationObj: {},
+      error: null,
+      errorInfo:null
     }
   }
 
   getLocation = async () => {
-    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.citySearch}&format=json`;
-    console.log("URL: ", url);
-    const response = await axios.get(url);
-    console.log("Response Display Name: ", response.data[0]);
-    this.setState({ locationObj: response.data[0] });
+    try {
+      const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.citySearch}&format=json`;
+      const response = await axios.get(url);
+      this.setState({ locationObj: response.data[0] });
+    } catch(error) {
+      if (error.response){
+        let message = `${error.response.data.error}. ${error.message} ${error.code}.`;
+        this.setState({error:{ status: error.response, message: message}});
+      }
+    }
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.error)
     return (
       <Container className="App">
         <h1>
           City Explorer
         </h1>
-        <input 
+        <Form>
+        <Form.Control 
           onChange={(event) => this.setState({citySearch: event.target.value })} 
-          placeholder='search for a city' ></input>
-        <button onClick={this.getLocation} >Explore!</button>
+          placeholder='search for a city' ></Form.Control>
+        <Button onClick={this.getLocation} >Explore!</Button>
+        </Form>
 
         {this.state.locationObj.place_id && 
         <Card id = "city">
@@ -42,6 +53,7 @@ class App extends Component {
           <Card.Img id ="mapImg" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.locationObj.lat},${this.state.locationObj.lon}&zoom=12&size=480x480`}/>
         </Card>
         }
+        {this.state.error && <Error id="errorMessage" {...this.state}></Error>}
       </Container>
     );
   }
