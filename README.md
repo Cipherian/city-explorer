@@ -3,7 +3,7 @@
 
 ## Version:  1.0.0
 
-## Overview
+## Overview 
 
 ## Getting Started
 
@@ -22,3 +22,5 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
+
+[alt text](img/City%20Explorer.jpg)
