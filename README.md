@@ -23,4 +23,4 @@ Finish time: _____
 
 Actual time needed to complete: _____
 
-	![alt text](image.jpg)
+	![alt text](img/City%20Explorer.jpg)
