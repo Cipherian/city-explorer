@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Error from "./Error.js";
+import Weather from "./Weather.js";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
       citySearch: "",
       locationObj: {},
       error: null,
-      errorInfo: null,
+      weather: {},
     };
   }
 
@@ -23,13 +24,22 @@ class App extends Component {
     try {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.citySearch}&format=json`;
       const response = await axios.get(url);
-      this.setState({ locationObj: response.data[0] });
+      this.setState({ locationObj: response.data[0], error: null });
     } catch (error) {
       if (error.response) {
         let message = `${error.response.data.error}. ${error.message} ${error.code}.`;
-        this.setState({ error: { status: error.response, message: message } });
+        this.setState({
+          error: { status: error.response, message: message },
+          locationObj: {},
+        });
       }
     }
+  };
+  getWeather = async () => {
+    const weatherUrl = `http://localhost:3001/weather?searchQuery=Seattle`;
+    const weatherResponse = await axios.get(weatherUrl);
+    console.log(weatherResponse);
+    this.setState({ weather: weatherResponse.data });
   };
 
   render() {
@@ -46,6 +56,7 @@ class App extends Component {
             placeholder="search for a city"
           ></Form.Control>
           <Button onClick={this.getLocation}>Explore!</Button>
+          <Button onClick={this.getWeather}> Get the Weather</Button>
         </Form>
 
         {this.state.locationObj.place_id && (
