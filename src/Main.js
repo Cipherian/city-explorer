@@ -1,5 +1,4 @@
 import { Component } from "react";
-import "/home/cyphe/projects/courses/class301/city-explorer/src/App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
