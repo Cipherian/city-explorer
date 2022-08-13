@@ -6,8 +6,9 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Error from "./Components/Error.js";
-import CityMap from "./Components/cityMap.js";
-import Weather from "./Components/Weather"
+import CityMap from "./Components/CityMap.js";
+import Weather from "./Components/Weather";
+import Movies from "./Components/Movies";
 
 class Main extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Main extends Component {
       locationObj: {},
       error: null,
       weather: [],
+      movies: [],
       map: null,
       lat: 0,
       lon: 0,
@@ -34,8 +36,8 @@ class Main extends Component {
         lat: data.lat,
         lon: data.lon,
       });
-      console.log(data.lat, data.lon)
       this.getWeather(data.lat, data.lon);
+      this.getMovies();
     } catch (error) {
       if (error.response) {
         let message = `${error.response.data.error}. ${error.message} ${error.code}.`;
@@ -47,23 +49,28 @@ class Main extends Component {
     }
   };
 
-  getWeather = async (lat,lon) => {
-    
-    let url = `${process.env.REACT_APP_LOCALHOST}/weather?lat=${lat}1&lon=${lon}}`;
+  getWeather = async (lat, lon) => {
+    let url = `${process.env.REACT_APP_HEROKU}/weather?lat=${lat}1&lon=${lon}}`;
     try {
-    let response = await axios.get(url);
+      let response = await axios.get(url);
       this.setState({
         weather: response.data,
-      }); 
-      console.log(response.data)
-      } catch (error) {
-        this.setState({ error: error});
+      });
+      console.log(response.data);
+    } catch (error) {
+      this.setState({ error: error });
     }
-  }
+  };
+
+  getMovies = async () => {
+    const url = `${process.env.REACT_APP_HEROKU}/movies?searchQuery=${this.state.citySearch}`;
+    const response = await axios.get(url);
+    console.log(response);
+    this.setState({ movies: response.data });
+  };
 
   handleChange = (event) => {
     this.setState({ citySearch: event.target.value });
-    console.log(event.target.value);
   };
 
   handleSubmit = (event) => {
@@ -92,10 +99,13 @@ class Main extends Component {
             lat={this.state.locationObj.lat}
             lon={this.state.locationObj.lon}
           />
-          )}
-          {this.state.locationObj.place_id && <Weather
-            weather={this.state.weather}
-          />}
+        )}
+        {this.state.locationObj.place_id && (
+            <Weather weather={this.state.weather} />
+        )}
+        {this.state.locationObj.place_id && (
+          <Movies movies={this.state.movies} />
+        )}
         {this.state.error && <Error error={this.state.error} />}
       </Container>
     );

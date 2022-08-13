@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -32,7 +33,41 @@ h1 {
   width:400px;
   margin:20px auto;
 }
+
+#movieContainer {
+  height:300px;
+}
 .cardTitle {
   text-align: center;
 
+}
+
+.card {
+  height:400px;
+  width:400px;
+  background-color: lightblue;
+}
+
+#cardImg {
+  height:15rem;
+  width:15rem;
+}
+
+#carousel {
+  height:300px;
+  display: flex;
+}
+
+.movieTitle {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.movieDescription {
+
+}
+
+.movieText {
+  display: block;
+  text-align: center;
 }
