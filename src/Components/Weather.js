@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Card from "react-bootstrap/Card";
-import axios from "axios";
+
 
 class Weather extends Component {
   render() {
