@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Container className="App">
         <Header />
-        <Main />
+        <Main  />
         <Footer />
       </Container>
     );

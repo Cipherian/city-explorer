@@ -8,6 +8,7 @@ import Error from "./Components/Error.js";
 import CityMap from "./Components/CityMap.js";
 import Weather from "./Components/Weather";
 import Movies from "./Components/Movies";
+import WeatherDay from "./Components/WeatherDay"
 
 class Main extends Component {
   constructor(props) {
