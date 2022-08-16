@@ -1,19 +1,24 @@
 import { Component } from "react";
-import Card from "react-bootstrap/Card";
+import WeatherDay from "./WeatherDay";
+import Accordion from "react-bootstrap/Accordion";
 
 
 class Weather extends Component {
   render() {
     return (
-      <Card className="weather">
-        <Card.Title>Three Day Forecast</Card.Title>
-        {this.props.weather.map((day, idx) => (
-            <Card.Text key={idx}> 
-              description {day.description}
-              date: {day.date}
-              </Card.Text>
+      <>
+        {this.props.weather.length > 0 && (
+          <Accordion defaultActiveKey="0">
+            {this.props.weather.map((day, idx) => (
+              <WeatherDay
+                key={this.key}
+                date={day.date}
+                description={day.description}
+              />
             ))}
-            </Card>
+          </Accordion>
+        )}
+      </>
     );
   }
 }
