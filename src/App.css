@@ -2,6 +2,7 @@
 .App {
   text-align: center;
 }
+
 * {
   background-color: beige;
 }
@@ -17,6 +18,13 @@ h1 {
   float: none;
   border:2px solid darkblue;
   background-color: lightblue;
+}
+
+.weather {
+  margin: 10px auto;
+  display: block;
+  width: 600px;
+  background-color:lightblue;
 }
 
 #mapImg {
@@ -42,9 +50,13 @@ h1 {
 
 }
 
-.card {
+.movieCard {
   height:400px;
   width:400px;
+  background-color: lightblue;
+}
+
+.movieCarousel {
   background-color: lightblue;
 }
 
@@ -54,12 +66,12 @@ h1 {
 }
 
 #carousel {
-  height:300px;
+  height:400px;
   display: flex;
 }
 
 .movieTitle {
-  font-size: 2rem;
+  font-size: 3rem;
   text-decoration: underline;
 }
 
@@ -71,3 +83,10 @@ h1 {
   display: block;
   text-align: center;
 }
+
+footer{
+  position: "fixed";
+  left: 0;
+  bottom: 0;
+  right: 0;
+  }
